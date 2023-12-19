@@ -1,4 +1,4 @@
-var score = 0;
+var score = 90;
 var currentQuestion = 0;
 
 console.log(myQuestions[currentQuestion]);
@@ -18,6 +18,8 @@ console.log(myQuestions[currentQuestion]);
 
 // when the game ends, it should display their score and give
 // the user the ability to save their score
+var timeElement = document.getElementById("time")
+
 var questionsElement = document.getElementById("questions");
 var questionTitleEl = document.getElementById("question-title");
 questionTitleEl.innerText = myQuestions[currentQuestion].question;
@@ -41,6 +43,8 @@ var startScreen = document.getElementById("start-screen");
 function startQuiz() {
   questionsElement.classList.remove("hide");
   startScreen.classList.add("hide");
+  startTimer();
+
 }
 var startButton = document.getElementById("start");
 startButton.addEventListener("click", startQuiz);
@@ -53,19 +57,38 @@ function displayNextQuestion() {
     answerThree.innerText = myQuestions[currentQuestion].answers.C;
     questionTitleEl.innerText = myQuestions[currentQuestion].question;
 }
+
+function endQuiz() {
+    
+}
+
+function updateTime() {
+    score -- ;
+    timeElement.innerText = score
+if (score <1){
+    endQuiz()
+}
+}
+
+function startTimer() {
+    setInterval( 
+    updateTime    
+    , 1000);
+}
+
 function checkAnswer() {
   console.log(event.target.id[6]);
   var answer = event.target.id[6];
   var correctAnswer = myQuestions[currentQuestion].correctAnswer;
-  if (answer === correctAnswer) {
-    score++;
-  } else {
-    score--;
+  if (answer !== correctAnswer) {
+    score -= 10 ;
   }
   if(currentQuestion  > myQuestions.length -1){
+    endQuiz()
     
   } else {
     displayNextQuestion() 
-  }
+ }
+
 }
 
