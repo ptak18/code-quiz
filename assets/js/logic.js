@@ -1,5 +1,5 @@
 var score = 0;
-var currentQuestion = 2;
+var currentQuestion = 0;
 
 console.log(myQuestions[currentQuestion]);
 
@@ -47,6 +47,11 @@ startButton.addEventListener("click", startQuiz);
 
 function displayNextQuestion() {
     console.log (score)
+    currentQuestion++ 
+    answerOne.innerText = myQuestions[currentQuestion].answers.A;
+    answerTwo.innerText = myQuestions[currentQuestion].answers.B;
+    answerThree.innerText = myQuestions[currentQuestion].answers.C;
+    questionTitleEl.innerText = myQuestions[currentQuestion].question;
 }
 function checkAnswer() {
   console.log(event.target.id[6]);
@@ -57,5 +62,10 @@ function checkAnswer() {
   } else {
     score--;
   }
-  displayNextQuestion();
+  if(currentQuestion  > myQuestions.length -1){
+    
+  } else {
+    displayNextQuestion() 
+  }
 }
+
